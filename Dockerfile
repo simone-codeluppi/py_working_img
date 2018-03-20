@@ -16,6 +16,7 @@ RUN apt-get install -y apt-utils
 RUN apt-get install -y vim
 RUN apt-get install -y gcc 
 RUN apt-get install -y mpich
+RUN apt-get install -y tmux
 
 # Update conda and anaconda
 RUN  ["/bin/bash", "-c", "conda update -n base conda && conda update anaconda"]
