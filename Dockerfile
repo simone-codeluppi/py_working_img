@@ -44,10 +44,10 @@ RUN ["/bin/bash", "-c", "conda create --name datashader_env python=3.6 h5py scik
 RUN ["/bin/bash", "-c","source activate datashader_env"]
 RUN ["/bin/bash", "-c", "conda install -c bokeh/label/dev datashader"]
 RUN ["/bin/bash", "-c", "conda install -c ioam/label/dev holoviews"]
-# RUN ["/bin/bash", "-c",'node /opt/conda/envs/datashader_env/lib/python3.5/site-packages/jupyterlab/staging/yarn.js install']
+RUN ["/bin/bash", "-c","node /opt/conda/envs/datashader_env/lib/python3.5/site-packages/jupyterlab/staging/yarn.js install"]
 # Add kernel to jupyter lab
-RUN "/bin/bash", "-c", "/opt/conda/envs/datashader_env/bin/python -m pip install ipykernel"]
-RUN "/bin/bash", "-c", "python -m ipykernel install --user --name datashader_env --display-name 'datashader_env'"]
+RUN ["/bin/bash", "-c", "/opt/conda/envs/datashader_env/bin/python -m pip install ipykernel"]
+RUN ["/bin/bash", "-c", "python -m ipykernel install --user --name datashader_env --display-name 'datashader_env'"]
 
 # Create the Mask R-CNN network
 RUN ["/bin/bash", "-c", "conda create --name RCNN_env python=3.6"]
