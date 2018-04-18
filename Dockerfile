@@ -18,6 +18,14 @@ RUN apt-get install -y gcc
 RUN apt-get install -y mpich
 RUN apt-get install -y tmux
 
+# add zsh
+RUN apt-get install -y zsh
+RUN wget https://github.com/robbyrussell/oh-my-zsh/raw/master/tools/install.sh -O - | zsh || true
+# to star zsh just type zsh
+
+
+
+
 # Update conda and anaconda
 RUN  ["/bin/bash", "-c", "conda update -n base conda && conda update anaconda"]
 
@@ -28,7 +36,7 @@ RUN ["/bin/bash", "-c","pip install --upgrade pip"]
 RUN ["/bin/bash", "-c", "conda create --name pysmFISH_testing_env python=3.6 h5py numpy scipy scikit-image pandas"]
 RUN ["/bin/bash", "-c", "source activate pysmFISH_testing_env"]
 RUN ["/bin/bash", "-c", "conda install -c conda-forge scipy dask distributed scikit-learn jupyterlab nodejs ipympl"]
-RUN ["/bin/bash", "-c", "pip install nd2reader==2.1.3 sympy ruamel.yaml mpi4py loompy sphinx sphinx_rtd_theme"]
+RUN ["/bin/bash", "-c", "pip install nd2reader==2.1.3 sympy ruamel.yaml mpi4py loompy sphinx sphinx_rtd_theme twine"]
 
 
 # Add the kernel of the pysmFISH_testing_env to the jupyter lab
@@ -62,10 +70,9 @@ RUN ["/bin/bash", "-c", "python -m ipykernel install --user --name datashader_en
 
 
 
+
 # Add some useful commands to ~/.bashrc
 RUN chmod 777 ~/.bashrc && echo 'alias jl="jupyter lab --port=8080 --ip=0.0.0.0 --no-browser --allow-root"'>> ~/.bashrc
-
-
 
 
 # List the available conda envs
