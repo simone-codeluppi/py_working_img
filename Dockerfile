@@ -24,19 +24,26 @@ RUN wget https://github.com/robbyrussell/oh-my-zsh/raw/master/tools/install.sh -
 # to star zsh just type zsh
 
 
-
-
 # Update conda and anaconda
 RUN  ["/bin/bash", "-c", "conda update -n base conda && conda update anaconda"]
 
 # Update pip
 RUN ["/bin/bash", "-c","pip install --upgrade pip"]
 
+
+# -------------------------------
 # Create the pysmFISH_testing_env
 RUN ["/bin/bash", "-c", "conda create --name pysmFISH_testing_env python=3.6 h5py numpy scipy scikit-image pandas"]
 RUN ["/bin/bash", "-c", "source activate pysmFISH_testing_env"]
 RUN ["/bin/bash", "-c", "conda install -c conda-forge scipy dask distributed scikit-learn jupyterlab nodejs ipympl"]
 RUN ["/bin/bash", "-c", "pip install nd2reader==2.1.3 sympy ruamel.yaml mpi4py loompy sphinx sphinx_rtd_theme twine"]
+
+# Install the xonsh shell
+RUN ["/bin/bash", "-c", "pip install xonsh"]
+RUN ["/bin/bash", "-c", "which xonsh >> /etc/shells"]
+RUN ["/bin/bash", "-c", "chsh -s $(which xonsh)"]
+RUN ["/bin/bash", "-c", "mkdir -p /root/.config/xonsh/"]
+RUN ["/bin/bash", "-c", "echo "{}" > /root/.config/xonsh/config.json"]
 
 
 # Add the kernel of the pysmFISH_testing_env to the jupyter lab
@@ -45,7 +52,10 @@ RUN ["/bin/bash", "-c", "python -m ipykernel install --user --name pysmFISH_test
 
 # Install extension for matplotlib in jupyter lab
 RUN ["/bin/bash", "-c", "jupyter labextension install @jupyter-widgets/jupyterlab-manager"]
+# -------------------------------
 
+
+# -------------------------------
 # Create the datashader env 
 RUN ["/bin/bash", "-c", "conda create --name datashader_env python=3.6 h5py scikit-image"]
 # RUN ["/bin/bash", "-c", "conda install -c conda-forge jupyterlab nodejs ipympl"]
@@ -57,7 +67,17 @@ RUN ["/bin/bash", "-c", "conda install -c ioam/label/dev holoviews"]
 # Add kernel to jupyter lab
 RUN ["/bin/bash", "-c", "/opt/conda/envs/datashader_env/bin/python -m pip install ipykernel"]
 RUN ["/bin/bash", "-c", "python -m ipykernel install --user --name datashader_env --display-name 'datashader_env'"]
+# Install the xonsh shell
+RUN ["/bin/bash", "-c", "pip install xonsh"]
+RUN ["/bin/bash", "-c", "which xonsh >> /etc/shells"]
+RUN ["/bin/bash", "-c", "chsh -s $(which xonsh)"]
+RUN ["/bin/bash", "-c", "mkdir -p /root/.config/xonsh/"]
+RUN ["/bin/bash", "-c", "echo "{}" > /root/.config/xonsh/config.json"]
 
+# -------------------------------
+
+
+# -------------------------------
 # Create the Mask R-CNN network
 RUN ["/bin/bash", "-c", "conda create --name RCNN_env python=3.6"]
 RUN ["/bin/bash", "-c","source activate RCNN_env"]
@@ -67,8 +87,14 @@ RUN ["/bin/bash", "-c","pip install h5py graphviz pydot keras Cython pycocotools
 # Add kernel to jupyter lab
 RUN ["/bin/bash", "-c", "/opt/conda/envs/RCNN_env/bin/python -m pip install ipykernel"]
 RUN ["/bin/bash", "-c", "python -m ipykernel install --user --name datashader_env --display-name 'RCNN_env'"]
+# Install the xonsh shell
+RUN ["/bin/bash", "-c", "pip install xonsh"]
+RUN ["/bin/bash", "-c", "which xonsh >> /etc/shells"]
+RUN ["/bin/bash", "-c", "chsh -s $(which xonsh)"]
+RUN ["/bin/bash", "-c", "mkdir -p /root/.config/xonsh/"]
+RUN ["/bin/bash", "-c", "echo "{}" > /root/.config/xonsh/config.json"]
 
-
+# -------------------------------
 
 
 # Add some useful commands to ~/.bashrc
@@ -77,7 +103,7 @@ RUN chmod 777 ~/.bashrc && echo 'alias jl="jupyter lab --port=8080 --ip=0.0.0.0 
 
 # List the available conda envs
 # Exposing ports
-EXPOSE 8080 3000
+EXPOSE 8080 3000 1520
 
 # Decide what to do with Entry and CMD
 
@@ -86,3 +112,6 @@ EXPOSE 8080 3000
 
 # Run jupyter lab on the exposed port if no command is passed
 # CMD ["/bin/bash", "-c","conda info --envs"]
+
+# Start application with xonsh shell
+CMD xonsh
