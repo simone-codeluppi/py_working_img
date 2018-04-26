@@ -40,10 +40,10 @@ RUN ["/bin/bash", "-c", "pip install nd2reader==2.1.3 sympy ruamel.yaml mpi4py l
 
 # Install the xonsh shell
 RUN ["/bin/bash", "-c", "pip install xonsh"]
-RUN ["/bin/bash", "-c", "which xonsh >> /etc/shells"]
-RUN ["/bin/bash", "-c", "chsh -s $(which xonsh)"]
-RUN ["/bin/bash", "-c", "mkdir -p /root/.config/xonsh/"]
-RUN ["/bin/bash", "-c", "echo "{}" > /root/.config/xonsh/config.json"]
+# RUN ["/bin/bash", "-c", "which xonsh >> /etc/shells"]
+# RUN ["/bin/bash", "-c", "chsh -s $(which xonsh)"]
+# RUN ["/bin/bash", "-c", "mkdir -p /root/.config/xonsh/"]
+# RUN ["/bin/bash", "-c", "echo "{}" > /root/.config/xonsh/config.json"]
 
 
 # Add the kernel of the pysmFISH_testing_env to the jupyter lab
@@ -70,9 +70,9 @@ RUN ["/bin/bash", "-c", "python -m ipykernel install --user --name datashader_en
 # Install the xonsh shell
 RUN ["/bin/bash", "-c", "pip install xonsh"]
 RUN ["/bin/bash", "-c", "which xonsh >> /etc/shells"]
-RUN ["/bin/bash", "-c", "chsh -s $(which xonsh)"]
-RUN ["/bin/bash", "-c", "mkdir -p /root/.config/xonsh/"]
-RUN ["/bin/bash", "-c", "echo "{}" > /root/.config/xonsh/config.json"]
+# RUN ["/bin/bash", "-c", "chsh -s $(which xonsh)"]
+# RUN ["/bin/bash", "-c", "mkdir -p /root/.config/xonsh/"]
+# RUN ["/bin/bash", "-c", "echo "{}" > /root/.config/xonsh/config.json"]
 
 # -------------------------------
 
@@ -89,10 +89,10 @@ RUN ["/bin/bash", "-c", "/opt/conda/envs/RCNN_env/bin/python -m pip install ipyk
 RUN ["/bin/bash", "-c", "python -m ipykernel install --user --name datashader_env --display-name 'RCNN_env'"]
 # Install the xonsh shell
 RUN ["/bin/bash", "-c", "pip install xonsh"]
-RUN ["/bin/bash", "-c", "which xonsh >> /etc/shells"]
-RUN ["/bin/bash", "-c", "chsh -s $(which xonsh)"]
-RUN ["/bin/bash", "-c", "mkdir -p /root/.config/xonsh/"]
-RUN ["/bin/bash", "-c", "echo "{}" > /root/.config/xonsh/config.json"]
+# RUN ["/bin/bash", "-c", "which xonsh >> /etc/shells"]
+# RUN ["/bin/bash", "-c", "chsh -s $(which xonsh)"]
+# RUN ["/bin/bash", "-c", "mkdir -p /root/.config/xonsh/"]
+# RUN ["/bin/bash", "-c", "echo "{}" > /root/.config/xonsh/config.json"]
 
 # -------------------------------
 
