@@ -33,7 +33,7 @@ RUN ["/bin/bash", "-c","pip install --upgrade pip"]
 
 # -------------------------------
 # Create the pysmFISH_testing_env
-RUN ["/bin/bash", "-c", "conda create --name pysmFISH_testing_env python=3.6 h5py numpy scipy scikit-image pandas"]
+RUN ["/bin/bash", "-c", "conda create --name pysmFISH_testing_env python=3.6 h5py numpy scipy scikit-image pandas loompy "]
 RUN ["/bin/bash", "-c", "source activate pysmFISH_testing_env"]
 RUN ["/bin/bash", "-c", "conda install -c conda-forge scipy dask distributed scikit-learn jupyterlab nodejs ipympl"]
 RUN ["/bin/bash", "-c", "pip install nd2reader==2.1.3 sympy ruamel.yaml mpi4py sphinx sphinx_rtd_theme twine"]
@@ -114,4 +114,4 @@ EXPOSE 8080 3000 1520
 # CMD ["/bin/bash", "-c","conda info --envs"]
 
 # Start application with xonsh shell
-CMD xonsh
+# CMD xonsh
