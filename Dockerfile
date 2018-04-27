@@ -36,7 +36,7 @@ RUN ["/bin/bash", "-c","pip install --upgrade pip"]
 RUN ["/bin/bash", "-c", "conda create --name pysmFISH_testing_env python=3.6 h5py numpy scipy scikit-image pandas"]
 RUN ["/bin/bash", "-c", "source activate pysmFISH_testing_env"]
 RUN ["/bin/bash", "-c", "conda install -c conda-forge scipy dask distributed scikit-learn jupyterlab nodejs ipympl"]
-RUN ["/bin/bash", "-c", "pip install nd2reader==2.1.3 sympy ruamel.yaml mpi4py loompy sphinx sphinx_rtd_theme twine"]
+RUN ["/bin/bash", "-c", "pip install nd2reader==2.1.3 sympy ruamel.yaml mpi4py sphinx sphinx_rtd_theme twine"]
 
 # Install the xonsh shell
 RUN ["/bin/bash", "-c", "pip install xonsh"]
