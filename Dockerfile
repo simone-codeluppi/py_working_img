@@ -25,21 +25,22 @@ RUN wget https://github.com/robbyrussell/oh-my-zsh/raw/master/tools/install.sh -
 
 
 # Update conda and anaconda
-RUN  ["/bin/bash", "-c", "conda update -n base conda && conda update anaconda"]
+RUN  ["/bin/bash", "-c", "yes | conda update -n base conda && conda update anaconda"]
 
-# Update pip
-RUN ["/bin/bash", "-c","pip install --upgrade pip"]
+
 
 
 # -------------------------------
 # Create the pysmFISH_testing_env
-RUN ["/bin/bash", "-c", "conda create --name pysmFISH_testing_env python=3.6 h5py numpy scipy scikit-image pandas loompy "]
-RUN ["/bin/bash", "-c", "source activate pysmFISH_testing_env"]
-RUN ["/bin/bash", "-c", "conda install -c conda-forge scipy dask distributed scikit-learn jupyterlab nodejs ipympl"]
-RUN ["/bin/bash", "-c", "pip install nd2reader==2.1.3 sympy ruamel.yaml mpi4py sphinx sphinx_rtd_theme twine"]
+RUN ["/bin/bash", "-c", "yes | conda create --name pysmFISH_testing_env python=3.6 h5py numpy scipy scikit-image pandas"]
+RUN ["/bin/bash", "-c", "yes | source activate pysmFISH_testing_env"]
+# Update pip
+RUN ["/bin/bash", "-c","yes | pip install --upgrade pip"]
+RUN ["/bin/bash", "-c", "yes | conda install -c conda-forge scipy dask distributed scikit-learn jupyterlab nodejs ipympl"]
+RUN ["/bin/bash", "-c", "yes | pip install nd2reader==2.1.3 sympy ruamel.yaml mpi4py sphinx sphinx_rtd_theme twine loompy"]
 
 # Install the xonsh shell
-RUN ["/bin/bash", "-c", "pip install xonsh"]
+RUN ["/bin/bash", "-c", "yes | pip install xonsh"]
 # RUN ["/bin/bash", "-c", "which xonsh >> /etc/shells"]
 # RUN ["/bin/bash", "-c", "chsh -s $(which xonsh)"]
 # RUN ["/bin/bash", "-c", "mkdir -p /root/.config/xonsh/"]
@@ -114,4 +115,4 @@ EXPOSE 8080 3000 1520
 # CMD ["/bin/bash", "-c","conda info --envs"]
 
 # Start application with xonsh shell
-# CMD xonsh
+# CMD xonshdocker 9
