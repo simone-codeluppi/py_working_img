@@ -32,7 +32,7 @@ RUN  ["/bin/bash", "-c", "yes | conda update -n base conda && conda update anaco
 
 # -------------------------------
 # Create the pysmFISH_testing_env
-RUN ["/bin/bash", "-c", "yes | conda create --name pysmFISH_testing_env python=3.6 h5py numpy scipy scikit-image pandas shapely"]
+RUN ["/bin/bash", "-c", "yes | conda create --name pysmFISH_testing_env python=3.6 h5py numpy scipy scikit-image pandas pylint"]
 RUN ["/bin/bash", "-c", "yes | source activate pysmFISH_testing_env"]
 # Update pip
 RUN ["/bin/bash", "-c","yes | pip install --upgrade pip"]
@@ -96,6 +96,41 @@ RUN ["/bin/bash", "-c", "pip install xonsh"]
 # RUN ["/bin/bash", "-c", "echo "{}" > /root/.config/xonsh/config.json"]
 
 # -------------------------------
+
+
+# -------------------------------
+# Create the xarray environment
+RUN ["/bin/bash", "-c", "yes | conda create --name xarray python=3.6 dask xarray"]
+RUN ["/bin/bash", "-c", "yes | source activate xarray"]
+# Update pip
+RUN ["/bin/bash", "-c","yes | pip install --upgrade pip"]
+RUN ["/bin/bash", "-c", "yes | condannnn install -c conda-forge jupyterlab nodejs ipympl"]
+# RUN ["/bin/bash", "-c", "yes | pip install nd2reader==2.1.3 sympy ruamel.yaml mpi4py sphinx sphinx_rtd_theme twine"]
+
+# Install the xonsh shell
+RUN ["/bin/bash", "-c", "yes | pip install xonsh"]
+# RUN ["/bin/bash", "-c", "which xonsh >> /etc/shells"]
+# RUN ["/bin/bash", "-c", "chsh -s $(which xonsh)"]
+# RUN ["/bin/bash", "-c", "mkdir -p /root/.config/xonsh/"]
+# RUN ["/bin/bash", "-c", "echo "{}" > /root/.config/xonsh/config.json"]
+
+
+# Add the kernel of the pysmFISH_testing_env to the jupyter lab
+RUN ["/bin/bash", "-c", "/opt/conda/envs/pysmFISH_testing_env/bin/python -m pip install ipykernel"]
+RUN ["/bin/bash", "-c", "python -m ipykernel install --user --name pysmFISH_testing_env --display-name 'pysmFISH_testing_env'"]
+
+# Install extension for matplotlib in jupyter lab
+RUN ["/bin/bash", "-c", "jupyter labextension install @jupyter-widgets/jupyterlab-manager"]
+# -------------------------------
+
+
+
+
+
+
+
+
+
 
 
 # Add some useful commands to ~/.bashrc
